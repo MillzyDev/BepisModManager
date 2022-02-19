@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System;
+using System.Linq;
 
 namespace BepisModManager.BepInEx
 {
@@ -36,6 +37,9 @@ namespace BepisModManager.BepInEx
                 }
             }
         }
+
+        public ReleaseArtifact GetArtifact(ReleaseUnityBackend backend)
+            => artifacts.First(x => x.Backend == backend);
 
         [JsonIgnore]
         string version;
