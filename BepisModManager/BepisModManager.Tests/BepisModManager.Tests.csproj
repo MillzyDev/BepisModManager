@@ -43,6 +43,10 @@
       <Project>{dc80fea6-ffc4-496b-9dab-4a4081abb7ee}</Project>
       <Name>BepisModManager.BepInEx</Name>
     </ProjectReference>
+    <ProjectReference Include="..\BepisModManager.Installation\BepisModManager.Installation.csproj">
+      <Project>{837a19bc-5392-43ff-83af-072f0c8dc41d}</Project>
+      <Name>BepisModManager.Installation</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
