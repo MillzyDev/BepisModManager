@@ -1,2 +1,2 @@
 # BepisModManager
-A tool designed to make installing BepInEx mods easier.
+Universal BepInEx Patcher/Installation tool
