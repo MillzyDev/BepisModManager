@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31911.196
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BepisModManager.Installation", "BepisModManager.Installation\BepisModManager.Installation.csproj", "{837A19BC-5392-43FF-83AF-072F0C8DC41D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BepisModManager.BepInEx", "BepisModManager.BepInEx\BepisModManager.BepInEx.csproj", "{DC80FEA6-FFC4-496B-9DAB-4A4081ABB7EE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BepisModManager.Tests", "BepisModManager.Tests\BepisModManager.Tests.csproj", "{E9E2E4C0-215C-4AFC-A4C9-FFE3540F8D87}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{837A19BC-5392-43FF-83AF-072F0C8DC41D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{837A19BC-5392-43FF-83AF-072F0C8DC41D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{837A19BC-5392-43FF-83AF-072F0C8DC41D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{837A19BC-5392-43FF-83AF-072F0C8DC41D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DC80FEA6-FFC4-496B-9DAB-4A4081ABB7EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DC80FEA6-FFC4-496B-9DAB-4A4081ABB7EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DC80FEA6-FFC4-496B-9DAB-4A4081ABB7EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DC80FEA6-FFC4-496B-9DAB-4A4081ABB7EE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E9E2E4C0-215C-4AFC-A4C9-FFE3540F8D87}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E9E2E4C0-215C-4AFC-A4C9-FFE3540F8D87}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E9E2E4C0-215C-4AFC-A4C9-FFE3540F8D87}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E9E2E4C0-215C-4AFC-A4C9-FFE3540F8D87}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C5FA8A06-70D8-46C3-AEF6-E78703FFCF95}
+	EndGlobalSection
+EndGlobal
