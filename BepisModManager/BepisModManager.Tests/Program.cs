@@ -26,8 +26,15 @@ namespace BepisModManager.Tests
                 );
 
             var analyser = new DllAnalyser("G:/SteamLibrary/steamapps/common/Just Shapes & Beats/UnityPlayer.dll");
-            Console.WriteLine(analyser.Headers);
+            //Console.WriteLine(analyser.Headers);
             Console.WriteLine($"JSAB is {analyser.Platform.ToString()}");
+
+            GameRegistry.Instance.AddGame("G:/SteamLibrary/steamapps/common/Just Shapes & Beats");
+            var game = GameRegistry.Instance.Games[0];
+            Console.WriteLine($"{game.Name}, {game.Platform}, {game.Backend}, {game.UnityVersion}, {(game.IsModded ? "Modded" : "Not Modded")}");
+            Console.WriteLine("Moddng Game");
+            game.InstallBepInEx();
+            Console.WriteLine($"{game.Name}, {game.Platform}, {game.Backend}, {game.UnityVersion}, {(game.IsModded ? "Modded" : "Not Modded")}");
         }
     }
 }
