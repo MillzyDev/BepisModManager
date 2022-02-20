@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BepisModManager.BepInEx", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BepisModManager.Tests", "BepisModManager.Tests\BepisModManager.Tests.csproj", "{E9E2E4C0-215C-4AFC-A4C9-FFE3540F8D87}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BepisModManager.Http", "BepisModManager.Http\BepisModManager.Http.csproj", "{B58EC85C-0E9B-4CF8-A12D-BB350DAEC0CC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{E9E2E4C0-215C-4AFC-A4C9-FFE3540F8D87}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E9E2E4C0-215C-4AFC-A4C9-FFE3540F8D87}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E9E2E4C0-215C-4AFC-A4C9-FFE3540F8D87}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B58EC85C-0E9B-4CF8-A12D-BB350DAEC0CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B58EC85C-0E9B-4CF8-A12D-BB350DAEC0CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B58EC85C-0E9B-4CF8-A12D-BB350DAEC0CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B58EC85C-0E9B-4CF8-A12D-BB350DAEC0CC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
