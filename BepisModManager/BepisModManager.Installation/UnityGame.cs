@@ -1,11 +1,13 @@
 ﻿using System.Diagnostics;
 using System.IO;
+using System.IO.Compression;
 using BepisModManager.BepInEx;
+using BepisModManager.Http;
 using BepisModManager.Installation.Exceptions;
 
 namespace BepisModManager.Installation
 {
-    class UnityGame
+    public class UnityGame
     {
         string name;
         string path;
@@ -23,7 +25,8 @@ namespace BepisModManager.Installation
                 throw new NonUnityGameException("Game provided is not a UnityEngine game");
 
             // set the game name
-            name = Path.GetDirectoryName(gamePath);
+            string[] splitPath = gamePath.Split('/');
+            name = splitPath[splitPath.Length - 1];
 
             // get the game unity version
             var playerInfo = FileVersionInfo.GetVersionInfo(unityPlayer);
@@ -48,36 +51,67 @@ namespace BepisModManager.Installation
 
         public void InstallBepInEx(bool bleedingEdge = false)
         {
-            string downloadURL;
+            string downloadURL = "";
+            string fileName = "";
 
             if (bleedingEdge || backend == UnityBackend.IL2CPP)
             {
                 var latestArtifacts = BleedingEdge.GetLatestArtifacts();
+                BleedingArtifacts.BleedingArtifact artifact;
 
                 if (platform == Platform.x64 && backend == UnityBackend.IL2CPP)
-                    downloadURL = BleedingEdge.GetDownloadURL(latestArtifacts.Id, latestArtifacts.GetArtifact(BleedingUnityBackend.BepInEx_UnityIL2CPP_x64).File);
+                {
+                    artifact = latestArtifacts.GetArtifact(BleedingUnityBackend.BepInEx_UnityIL2CPP_x64);
+                }
                 else if (platform == Platform.x86 && backend == UnityBackend.IL2CPP)
-                    downloadURL = BleedingEdge.GetDownloadURL(latestArtifacts.Id, latestArtifacts.GetArtifact(BleedingUnityBackend.BepInEx_UnityIL2CPP_x86).File);
+                {
+                    artifact = latestArtifacts.GetArtifact(BleedingUnityBackend.BepInEx_UnityIL2CPP_x86);
+                }
                 else if (platform == Platform.x64 && backend == UnityBackend.Mono)
-                    downloadURL = BleedingEdge.GetDownloadURL(latestArtifacts.Id, latestArtifacts.GetArtifact(BleedingUnityBackend.BepInEx_UnityMono_x64).File);
+                {
+                    artifact = latestArtifacts.GetArtifact(BleedingUnityBackend.BepInEx_UnityMono_x64);
+                }
                 else if (platform == Platform.x86 && backend == UnityBackend.Mono)
-                    downloadURL = BleedingEdge.GetDownloadURL(latestArtifacts.Id, latestArtifacts.GetArtifact(BleedingUnityBackend.BepInEx_UnityMono_x86).File);
+                {
+                    artifact = latestArtifacts.GetArtifact(BleedingUnityBackend.BepInEx_UnityMono_x86);
+                }
                 else
-                    downloadURL = BleedingEdge.GetDownloadURL(latestArtifacts.Id, latestArtifacts.GetArtifact(BleedingUnityBackend.BepInEx_UnityMono_unix).File);
+                {
+                    artifact = latestArtifacts.GetArtifact(BleedingUnityBackend.BepInEx_UnityMono_unix);
+                }
+
+                fileName = artifact.File;
+                downloadURL = BleedingEdge.GetDownloadURL(latestArtifacts.Id, fileName);
+
             } 
             else
             {
                 var latestArtifacts = Release.GetLatestArtifacts();
+                ReleaseArtifacts.ReleaseArtifact artifact;
 
                 if (platform == Platform.x64)
-                    downloadURL = latestArtifacts.GetArtifact(ReleaseUnityBackend.BepInEx_x64).DownloadURL;
+                    artifact = latestArtifacts.GetArtifact(ReleaseUnityBackend.BepInEx_x64);
                 else if (platform == Platform.x86)
-                    downloadURL = latestArtifacts.GetArtifact(ReleaseUnityBackend.BepInEx_x86).DownloadURL;
+                    artifact = latestArtifacts.GetArtifact(ReleaseUnityBackend.BepInEx_x86);
                 else
-                    downloadURL = latestArtifacts.GetArtifact(ReleaseUnityBackend.BepInEx_unix).DownloadURL;
+                    artifact = latestArtifacts.GetArtifact(ReleaseUnityBackend.BepInEx_unix);
+
+                downloadURL = artifact.DownloadURL;
+                fileName = artifact.FileName;
             }
 
-            // TODO: Download file and install to game
+            // create temp stuff if it doesnt exist
+            Directory.CreateDirectory(TempStorage.TempPath);
+
+            // download the zip
+            string tempPath = Path.Combine(TempStorage.TempPath, fileName);
+            HttpHelper.DownloadFileAsync(downloadURL, Path.Combine(TempStorage.TempPath, fileName)).GetAwaiter().GetResult();
+
+            // extract zip
+            var zipArchive = ZipFile.OpenRead(tempPath);
+            zipArchive.ExtractToDirectory(path, true);
+            
+            isModded = true;
         }
 
         public string Name
@@ -98,6 +132,11 @@ namespace BepisModManager.Installation
         public UnityBackend Backend
         {
             get => backend;
+        }
+
+        public bool IsModded
+        {
+            get => isModded;
         }
     }
 }
