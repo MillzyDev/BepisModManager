@@ -17,3 +17,4 @@ Each BepisModManager module has its dependencies.
 - BepisModManager.BepInEx
 - BepisModManager.Http
 - System
+- System.IO.Compression.FileSystem
