@@ -15,6 +15,13 @@ namespace BepisModManager.BepInEx
                 set;
             }
 
+            [JsonProperty("name")]
+            public string FileName
+            {
+                get;
+                set;
+            }
+
             [JsonIgnore]
             ReleaseUnityBackend backend;
 
