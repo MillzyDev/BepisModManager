@@ -4,13 +4,18 @@ using System.IO;
 
 namespace BepisModManager.Installation
 {
-    class GameRegistry
+    public class GameRegistry
     {
-        private List<UnityGame> games;
+        private List<UnityGame> games = new List<UnityGame>();
 
-        private GameRegistry instance;
+        public List<UnityGame> Games
+        {
+            get => games;
+        }
 
-        public GameRegistry Instance
+        private static GameRegistry instance;
+
+        public static GameRegistry Instance
         {
             get
             {
