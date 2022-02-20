@@ -32,7 +32,7 @@ bld/
 [Ll]ogs/
 
 # Backups
-*.backup
+*.backup/
 
 # Visual Studio 2015/2017 cache/options directory
 .vs/
