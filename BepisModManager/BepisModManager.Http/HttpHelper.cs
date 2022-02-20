@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Net.Http;
 using System.Reflection;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace BepisModManager.Http
@@ -22,18 +19,26 @@ namespace BepisModManager.Http
             return str;
         }
 
-        public static async void DownloadFileAsync(string url, string outputPath)
+        public static async Task<bool> DownloadFileAsync(string url, string outputPath)
         {
-            Uri uri;
+            try
+            {
+                Uri uri;
 
-            if (!Uri.TryCreate(url, UriKind.Absolute, out uri))
-                throw new InvalidOperationException("URI is invalid.");
+                if (!Uri.TryCreate(url, UriKind.Absolute, out uri))
+                    throw new InvalidOperationException("URI is invalid.");
 
-            if (!File.Exists(outputPath))
-                File.Create(outputPath);
+                if (!File.Exists(outputPath))
+                    File.Create(outputPath);
 
-            byte[] fileBytes = await _httpClient.GetByteArrayAsync(url);
-            File.WriteAllBytes(outputPath, fileBytes);
+                byte[] fileBytes = await _httpClient.GetByteArrayAsync(url);
+                File.WriteAllBytes(outputPath, fileBytes);
+                return true;
+            } 
+            catch
+            {
+                return false;
+            }
         }
     }
 }

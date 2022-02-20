@@ -1,7 +1,5 @@
-﻿using Newtonsoft.Json;
-using System.Net;
-using System.Net.Http;
-using System.Reflection;
+﻿using BepisModManager.Http;
+using Newtonsoft.Json;
 
 namespace BepisModManager.BepInEx
 {
@@ -18,15 +16,10 @@ namespace BepisModManager.BepInEx
 
         static BleedingArtifacts GetArtifactsFromURL(string url)
         {
-            using (var httpClient = new HttpClient())
-            {
-                var request = new HttpRequestMessage(HttpMethod.Get, url);
-                request.Headers.Add("User-Agent", $"BepisModManager/${Assembly.GetExecutingAssembly().GetName().Version.ToString()}");
-                var response = httpClient.SendAsync(request).GetAwaiter().GetResult().Content.ReadAsStringAsync().GetAwaiter().GetResult();
+            var response = HttpHelper.GetStringFromURLAsync(url).GetAwaiter().GetResult();
 
-                var artifacts = JsonConvert.DeserializeObject<BleedingArtifacts>(response);
-                return artifacts;
-            }
+            var artifacts = JsonConvert.DeserializeObject<BleedingArtifacts>(response);
+            return artifacts;
         }
     }
 }
